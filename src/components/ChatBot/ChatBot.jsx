@@ -19,12 +19,6 @@ function ChatBot() {
   const active = useSelector(state => state.auth.active)
   const navigate = useNavigate()
 
-  // useEffect(() => {
-  //   if (!active) {
-  //     navigate('/login')
-  //   }
-  // })
-
   const createBox = () => {
     const btn = document.getElementById('helpbtn');
     const box = document.getElementById('chatbox');
@@ -37,14 +31,14 @@ function ChatBot() {
 
     if (query.trim() === '') return;
 
-    // Add user's query to the conversation
+    // Adding user's query to the conversation
     setConversation([...conversation, { sender: 'user', text: query }]);
     
-    // Fetch the assistant's reply
+    // Fetching the assistant's reply
     
     const reply = await Kevin(query, prevOrders, username, ordersInCart);
     setQuery('')
-    // Add assistant's reply to the conversation
+    // Adding assistant's reply to the conversation
     setConversation((prevConversation) => [
       ...prevConversation,
       { sender: 'assistant', text: reply },
@@ -125,63 +119,3 @@ function ChatBot() {
 }
 
 export default ChatBot;
-
-
-
-
-
-// import React, { useState } from 'react'
-// import './ChatBox.css'
-// import getInfo from '../Hooks/chat'
-
-// function ChatBot() {
-//   const [query, setQuery] = useState('usd')
-//   const createBox = () => {
-//     const btn = document.getElementById("helpbtn")
-//     const box = document.getElementById("chatbox")
-//     btn.classList.toggle('hidden')
-//     box.classList.toggle('hidden')
-//   }
-
-//   const handleSubmit = () => {
-    
-//   }
-
-//   return (
-//     <footer className='bg-gray-400'>
-//         <div className='fixed bottom-10 right-10'>
-//           <div id="chatbox" className='hidden float-right'>
-//             <div className=''>
-//               <div className='border-black text-white border-2 bg-gray-950 p-2' 
-//               style={{borderTopLeftRadius: 10, borderTopRightRadius: 10}}
-//               >
-//                 <p className='mx-auto  inline-block '>Assistant</p>
-//                 <button 
-//                 onClick={createBox}
-//                 className='float-right text-white hover:scale-110'><img src="https://cdn.vectorstock.com/i/1000x1000/92/03/icon-close-button-vector-20409203.webp" className='h-5 w-5 mt-0.5' alt="" /></button>
-//               </div>
-//               <div className='border-2 border-black bg-gray-600 w-full h-96 overflow-y-scroll' 
-//               // style={{height: 200, width: 200, borderBottomLeftRadius: 10, borderBottomRightRadius: 10}}
-//               style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 10}}>
-//                 <p className='text-white w-full flex items-center'><img src="https://www.simplilearn.com/ice9/free_resources_article_thumb/Advantages_and_Disadvantages_of_artificial_intelligence.jpg" alt="DP" className='w-12 h-12 inline-block border-2 border-white m-2' />Hello👋 I'm Kevin, Your personal assistant.</p>
-//                 <div className='flex justify-center w-full'>
-//                   <input 
-//                   type="text" 
-//                   className='absolute bottom-1 w-3/5 py-2 rounded-lg overflow-scroll overflow-y-scroll'
-//                   placeholder='  Enter Query'
-//                   value={query} 
-//                   onChange={(e) => setQuery(e.target.value)}
-//                   onSubmit={handleSubmit}/>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//           <button id="helpbtn"
-//           onClick={createBox}
-//           className='bg-blue-400 rounded-lg py-2 px-5 font-semibold hover:bg-blue-500 justify-self-center fixed bottom-10 right-10'>Need help?</button>
-//         </div>
-//     </footer>
-//   )
-// }
-
-// export default ChatBot
